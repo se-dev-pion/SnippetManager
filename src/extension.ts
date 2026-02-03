@@ -147,6 +147,10 @@ export function activate(context: vscode.ExtensionContext) {
       if (!(file?.fileName && path.extname(file.fileName) === ".xml")) {
         return;
       }
+      const fileContent = await xml.parseStringPromise(file.getText());
+      if (!fileContent.main.snippetManagerConfig) {
+        return;
+      }
 
       for (let key in highlight) {
         const fileContent = file.getText();
@@ -247,6 +251,58 @@ export function activate(context: vscode.ExtensionContext) {
     "",
   );
   context.subscriptions.push(provider);
+
+  const typeProvider = vscode.languages.registerCompletionItemProvider(
+    "xml",
+    {
+      async provideCompletionItems(document, position, token, context) {
+        const fileContent = await xml.parseStringPromise(document.getText());
+        if (!fileContent.main.snippetManagerConfig) {
+          return;
+        }
+        const typeList = {
+          "Text(文本)": "0",
+          "Method(方法)": "1",
+          "Funtion(函数)": "2",
+          "Constructor(构造函数)": "3",
+          "Field(字段)": "4",
+          "Variable(变量)": "5",
+          "Class(类)": "6",
+          "Interface(接口)": "7",
+          "Module(模型)": "8",
+          "Property(属性)": "9",
+          "Unit(单元)": "10",
+          "Value(值)": "11",
+          "Enum(枚举)": "12",
+          "Keyword(关键词)": "13",
+          "Snippet(片段)": "14",
+          "Color(颜色)": "15",
+          "Reference(参考)": "16",
+          "File(文件)": "17",
+          "Folder(文件夹)": "18",
+          "EnumMember(枚举成员)": "19",
+          "Constant(常量)": "20",
+          "Struct(结构体)": "21",
+          "Event(事件)": "22",
+          "Operator(操作成员)": "23",
+          "TypeParameter(类型参数)": "24",
+          "User(用户)": "25",
+          "Issue(议题)": "26",
+        };
+        var allProvider = [];
+        for (let key in typeList) {
+          const item = new vscode.CompletionItem(
+            key,
+            parseInt(typeList[key as keyof typeof typeList]),
+          );
+          item.insertText = typeList[key as keyof typeof typeList];
+          allProvider.push(item);
+        }
+        return allProvider;
+      },
+    },
+    "",
+  );
 }
 
 export function deactivate() {}
