@@ -263,7 +263,7 @@ export function activate(context: vscode.ExtensionContext) {
         const typeList = {
           "Text(文本)": "0",
           "Method(方法)": "1",
-          "Funtion(函数)": "2",
+          "Function(函数)": "2",
           "Constructor(构造函数)": "3",
           "Field(字段)": "4",
           "Variable(变量)": "5",
