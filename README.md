@@ -60,6 +60,28 @@ function {0:functionName}({1:args}) {
 
 When inserting this snippet, the cursor will sequentially jump to `functionName` → `args` → function body position.
 
+# Highlight Display
+
+## Settings
+In the snippetManager settings, there is an option named "highlight". Click the link to open settings.json file, and you will be redirected to the settings.json configuration file.
+
+When configuring highlight, use the format `extension: color` to define highlight colors.
+
+## Example
+```json
+{
+  "html": "#ebbc24",
+  "xml": "#ce2c03",
+  "py": "#1e7be6"
+  // ...
+}
+```
+
+## Effect
+After configuration, open a snippet configuration file. In the scope attribute, you will see the corresponding text displayed in the specified color.
+
+![Failed to load](https://github.com/se-dev-pion/SnippetManager/tree/main/image/highlight.png)
+
 ## Development Guide
 
 ### Requirements
