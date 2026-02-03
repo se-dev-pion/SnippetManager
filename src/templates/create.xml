@@ -7,6 +7,7 @@
     <tip>创建一个xml的snippet模板</tip>
     <type>3</type>
     <main><![CDATA[<main>
+  <snippetManagerConfig />
   <name>{0:名称}</name>
   <snippet>
     <scope>{1:作用域(后缀判断)}</scope>
