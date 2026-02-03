@@ -76,7 +76,7 @@ function {0:functionName}({1:args}) {
 ```
 #### 效果
 设置完成后，打开一个片段配置文件，在scope这个属性中你可以看到对应文本被更改为对应颜色
-![加载失败](https://github.com/se-dev-pion/SnippetManager/bolb/main/image/highlight.png)
+![加载失败](https://github.com/se-dev-pion/SnippetManager/blob/main/image/highlight.png)
 
 
 ## 开发指南
