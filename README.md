@@ -80,7 +80,7 @@ When configuring highlight, use the format `extension: color` to define highligh
 ## Effect
 After configuration, open a snippet configuration file. In the scope attribute, you will see the corresponding text displayed in the specified color.
 
-![Failed to load](https://github.com/se-dev-pion/SnippetManager/bolb/main/image/highlight.png)
+![Failed to load](https://github.com/se-dev-pion/SnippetManager/blob/main/image/highlight.png)
 
 ## Development Guide
 
