@@ -1,4 +1,5 @@
 <main>
+  <snippetManagerConfig />
   <name>创建模板工具包</name>
   <snippet>
     <scope>xml</scope>
