@@ -12,6 +12,17 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "SnippetManager",
+      "properties": {
+        "snippetManager.highlight": {
+          "type": "object",
+          "default": {},
+          "description": "后缀高亮设置,需要用json编写",
+          "order": 0
+        }
+      }
+    },
     "commands": [
       {
         "command": "snippetManager.addFile",
@@ -24,6 +35,10 @@
       {
         "command": "snippetManager.reOpenConfig",
         "title": "重新打开配置"
+      },
+      {
+        "command": "snippetManager.refreshHighlight",
+        "title": "刷新高亮"
       }
     ],
     "viewsContainers": {
