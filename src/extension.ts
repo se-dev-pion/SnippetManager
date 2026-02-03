@@ -6,7 +6,7 @@ import * as path from "path";
 export function activate(context: vscode.ExtensionContext) {
   // ==================== 工具/配置 ====================
   // 刷新界面
-  function refresh() {
+  function refreshViews() {
     vscode.window.createTreeView("snippetManager-loaded", {
       treeDataProvider: {
         getChildren: () => treeData,
@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
   }
   const treeData: vscode.TreeItem[] = [];
   const treeStr: string[] = [];
-  refresh();
+  refreshViews();
 
   // ==================== 命令 ====================
   // 添加配置
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
             treeItem.contextValue = "configFile";
             treeData.push(treeItem);
             treeStr.push(file[0].fsPath);
-            refresh();
+            refreshViews();
           } else {
             vscode.window.showErrorMessage(
               `${file[0].fsPath} 配置文件需要有 name 属性`,
@@ -79,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (index > -1) {
               treeData.splice(index, 1);
               treeStr.splice(index, 1);
-              refresh();
+              refreshViews();
             }
           }
         });
@@ -96,7 +96,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (index > -1) {
         treeData.splice(index, 1);
         treeStr.splice(index, 1);
-        refresh();
+        refreshViews();
       }
       // 添加
       const file = await vscode.window.showOpenDialog({
@@ -125,7 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
             treeItem.description = file[0].fsPath;
             treeData.push(treeItem);
             treeStr.push(file[0].fsPath);
-            refresh();
+            refreshViews();
           } else {
             vscode.window.showErrorMessage(
               `${file[0].fsPath} 配置文件需要有 name 属性`,
@@ -137,7 +137,51 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(reOpenConfig);
 
+  // 刷新高亮
+  const refreshHighlight = vscode.commands.registerCommand(
+    "snippetManager.refreshHighlight",
+    async () => {
+      const config = vscode.workspace.getConfiguration("snippetManager");
+      const file = vscode.window.activeTextEditor?.document;
+      const highlight = config.get<Record<string, string>>("highlight", {});
+      if (!(file?.fileName && path.extname(file.fileName) === ".xml")) {
+        return;
+      }
+
+      for (let key in highlight) {
+        const fileContent = file.getText();
+        const style = vscode.window.createTextEditorDecorationType({
+          color: highlight[key],
+        });
+        const regexp = new RegExp(`(<scope>.*)${key}.*</scope>`, "g");
+        let match;
+        var index = -1;
+        var allRange = [];
+        while ((match = regexp.exec(fileContent)) !== null) {
+          while ((index = fileContent.indexOf(match[0], index + 1)) !== -1) {
+            allRange.push(
+              new vscode.Range(
+                file.positionAt(index + match[1].length),
+                file.positionAt(index + key.length + match[1].length),
+              ),
+            );
+          }
+        }
+        const editor = vscode.window.activeTextEditor;
+        editor?.setDecorations(style, allRange);
+      }
+    },
+  );
+  context.subscriptions.push(refreshHighlight);
+
   // ==================== 其他/主要功能 ====================
+  // 监听事件进行高亮
+  vscode.window.onDidChangeActiveTextEditor((editor) => {
+    vscode.commands.executeCommand("snippetManager.refreshHighlight");
+  });
+  vscode.workspace.onDidSaveTextDocument((editor) => {
+    vscode.commands.executeCommand("snippetManager.refreshHighlight");
+  });
   // 使用配置进行代码补全
   const provider = vscode.languages.registerCompletionItemProvider(
     "*",
