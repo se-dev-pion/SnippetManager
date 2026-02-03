@@ -6,8 +6,10 @@
   "engines": {
     "vscode": "^1.108.0"
   },
+  "icon": "/res/icon-64.png",
   "categories": [
-    "Snippets"
+    "Snippets",
+    "Visualization"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
