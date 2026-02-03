@@ -2,7 +2,7 @@
   "name": "snippetmanager",
   "displayName": "SnippetManager",
   "description": "Manage and organize your VSCode code snippets efficiently",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "engines": {
     "vscode": "^1.108.0"
   },
