@@ -60,6 +60,25 @@ function {0:functionName}({1:args}) {
 
 当插入此片段时，光标会依次跳转到 `functionName` → `args` → 函数体位置。
 
+### 高亮显示
+
+#### 设置
+在snippetManager设置中有一个名为“highlight”的设置项，点击在settings.json文件打开链接，即可跳转至settings.json配置文件
+编写highlight时，使用`scope: color`(`后缀名: 颜色`)来定义高亮颜色
+#### 示例
+```json
+{
+  "html": "#ebbc24",
+  "xml": "#ce2c03",
+  "py": "#1e7be6"
+  // ...
+}
+```
+#### 效果
+设置完成后，打开一个片段配置文件，在scope这个属性中你可以看到对应文本被更改为对应颜色
+![加载失败](https://github.com/se-dev-pion/SnippetManager/tree/main/image/highlight.png)
+
+
 ## 开发指南
 
 ### 环境要求
