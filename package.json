@@ -17,20 +17,9 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "configuration": {
-      "title": "SnippetManager",
-      "properties": {
-        "snippetManager.highlight": {
-          "type": "object",
-          "default": {},
-          "description": "后缀高亮设置,需要用json编写",
-          "order": 0
-        }
-      }
-    },
     "commands": [
       {
-        "command": "snippetManager.addFile",
+        "command": "snippetManager.addConfig",
         "title": "添加文件"
       },
       {
@@ -42,24 +31,24 @@
         "title": "重新打开配置"
       },
       {
-        "command": "snippetManager.refreshHighlight",
-        "title": "刷新高亮"
+        "command": "snippetManager.compiler",
+        "title": "编译片段文件"
       }
     ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "snippetManagerView",
+          "id": "snippetManager-View",
           "title": "片段管理器",
           "icon": "/res/icon-64.png"
         }
       ]
     },
     "views": {
-      "snippetManagerView": [
+      "snippetManager-View": [
         {
-          "id": "snippetManager-loaded",
-          "name": "已加载的配置文件",
+          "id": "snippetManager.loadedView",
+          "name": "加载的配置",
           "icon": "/res/icon-64.png"
         }
       ]
@@ -67,22 +56,28 @@
     "menus": {
       "view/title": [
         {
-          "command": "snippetManager.addFile",
-          "when": "view == snippetManager-loaded",
-          "group": "navigation",
-          "icon": "$(add)"
+          "command": "snippetManager.addConfig",
+          "when": "view == snippetManager.loadedView",
+          "group": "menu",
+          "icon": ""
+        },
+        {
+          "command": "snippetManager.compiler",
+          "when": "view == snippetManager.loadedView",
+          "group": "menu",
+          "icon": ""
         }
       ],
       "view/item/context": [
         {
           "command": "snippetManager.delConfig",
-          "when": "view == snippetManager-loaded && viewItem == configFile",
-          "group": "inline"
+          "when": "view == snippetManager.loadedView && viewItem == configItem",
+          "group": "menu"
         },
         {
           "command": "snippetManager.reOpenConfig",
-          "when": "view == snippetManager-loaded && viewItem == configFile",
-          "group": "inline"
+          "when": "view == snippetManager.loadedView && viewItem == configItem",
+          "group": "menu"
         }
       ]
     }
