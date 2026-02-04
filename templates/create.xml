@@ -1,0 +1,39 @@
+<root>
+  <name>创建模板工具包</name>
+  <item>
+    <scope>xml</scope>
+    <key>createSnippet</key>
+    <tip>创建一个xml的snippet模板</tip>
+    <type>#struct</type>
+    <main><![CDATA[<root>
+  <name>${1:名称}</name>
+  <item>
+    <scope>${2:作用域(后缀判断)}</scope>
+    <key>${3:关键字符}</key>
+    <tip>${4:描述}</tip>${5:
+    <type>类型</type>}
+    <main>${0:主要代码}</main>
+  </item>
+</root>]]></main>
+  </item>
+  <item>
+    <scope>xml</scope>
+    <key>snippet</key>
+    <tip>创建一个xml的snippet</tip>
+    <type>#struct</type>
+    <main><![CDATA[<item>
+  <scope>${1:作用域(后缀判断)}</scope>
+  <key>${2:关键字符}</key>
+  <tip>${3:描述}</tip>${4:
+  <type>类型</type>}
+  <main>${0:主要代码}</main>
+</item>]]></main>
+  </item>
+  <item>
+    <scope>xml</scope>
+    <key>CDATA</key>
+    <tip>创建CDATA</tip>
+    <type>#constant</type>
+    <main><![CDATA[<![CDATA[$0]]>]]></main>
+  </item>
+</root>
