@@ -35,14 +35,7 @@ export function main(
         encoding: "utf-8",
       });
       const result = await xml.parseStringPromise(fileContent);
-      if (
-        !(
-          result &&
-          result.root &&
-          result.root.name &&
-          result.root.item
-        )
-      ) {
+      if (!(result && result.root && result.root.name && result.root.item)) {
         vscode.window.showWarningMessage(
           "配置文件必须包含:root & root/name & root/snippetManagerConfig & root/item属性!",
         );
@@ -56,6 +49,9 @@ export function main(
         title: "打开文件",
         arguments: [vscode.Uri.file(file[0].fsPath)],
       };
+      if (result.root.icon) {
+        newItem.iconPath = result.root.icon[0];
+      }
       loadedView.push(newItem);
       refresh.loaded();
     },
