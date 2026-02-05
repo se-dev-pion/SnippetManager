@@ -6,11 +6,12 @@
     <tip>创建一个xml的snippet模板</tip>
     <type>#struct</type>
     <main><![CDATA[<root>
-  <name>${1:名称}</name>
+  <name>${1:名称}</name>${2:
+  <icon>图标路径</icon>}
   <item>
-    <scope>${2:作用域(后缀判断)}</scope>
-    <key>${3:关键字符}</key>
-    <tip>${4:描述}</tip>${5:
+    <scope>${3:作用域(后缀判断)}</scope>
+    <key>${4:关键字符}</key>
+    <tip>${5:描述}</tip>${6:
     <type>类型</type>}
     <main>${0:主要代码}</main>
   </item>
