@@ -19,7 +19,8 @@ export async function activate(context: vscode.ExtensionContext) {
   delConfig.main(loadedView, refresh, context);
   reOpenConfig.main(loadedView, refresh, context);
   compiler.main(context);
-  highlight.main();
+  highlight.scope();
+  highlight.args();
 
   complete.main(loadedView, context);
   typeComplete.main(context);
