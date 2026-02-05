@@ -1,14 +1,14 @@
 import * as vscode from "vscode";
 
-export class main {
-  loadedShow: vscode.TreeItem[] = [];
+export class Main {
+  loadedView: vscode.TreeItem[] = [];
   loaded() {
     vscode.window.createTreeView("snippetManager.loadedView", {
       treeDataProvider: {
-        getChildren: () => this.loadedShow,
+        getChildren: () => this.loadedView,
         getTreeItem: (item: vscode.TreeItem) => item,
       },
     });
-    return this.loadedShow;
+    return this.loadedView;
   }
 }
