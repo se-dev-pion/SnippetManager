@@ -5,7 +5,7 @@ import * as refreshViews from "../tools/refreshViews";
 
 export function main(
   loadedView: vscode.TreeItem[],
-  refresh: refreshViews.main,
+  refresh: refreshViews.Main,
   context: vscode.ExtensionContext,
 ) {
   const main = vscode.commands.registerCommand(
