@@ -5,7 +5,7 @@ import * as refreshViews from "../tools/refreshViews";
 
 export function main(
   loadedView: vscode.TreeItem[],
-  refresh: refreshViews.main,
+  refresh: refreshViews.Main,
   context: vscode.ExtensionContext,
 ) {
   const main = vscode.commands.registerCommand(
@@ -35,14 +35,7 @@ export function main(
         encoding: "utf-8",
       });
       const result = await xml.parseStringPromise(fileContent);
-      if (
-        !(
-          result &&
-          result.root &&
-          result.root.name &&
-          result.root.item
-        )
-      ) {
+      if (!(result && result.root && result.root.name && result.root.item)) {
         vscode.window.showWarningMessage(
           "配置文件必须包含:root & root/name & root/snippetManagerConfig & root/item属性!",
         );
