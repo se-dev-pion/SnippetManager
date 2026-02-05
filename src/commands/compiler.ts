@@ -12,7 +12,7 @@ export function main(context: vscode.ExtensionContext) {
         canSelectFolders: false,
         canSelectMany: false,
         filters: {
-          片段文件: ["code-snippets", "xml"]
+          片段文件: ["code-snippets", "xml"],
         },
         title: "打开要转移的文件(.xml/.code-snippets)",
       });
@@ -71,7 +71,7 @@ export function main(context: vscode.ExtensionContext) {
         let index = 0;
         writeContent += "{\n";
         for (let item of result.root.item) {
-          if (item.$.id) {
+          if (item.$ && item.$.id) {
             writeContent += `  "${item.$.id}": {\n`;
           } else {
             writeContent += `  "item-${index}": {\n`;
