@@ -17,6 +17,24 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "SnippetManager",
+      "properties": {
+        "snippetManager.highlightColor": {
+          "type": "object",
+          "title": "高亮颜色配置",
+          "default": {
+            "html": "#4CAF50",
+            "xml": "#2196F3",
+            "js": "#FF9800",
+            "css": "#9C27B0",
+            "json": "#00BCD4",
+            "python": "#3F51B5",
+            "sql": "#795548"
+          }
+        }
+      }
+    },
     "commands": [
       {
         "command": "snippetManager.addConfig",
