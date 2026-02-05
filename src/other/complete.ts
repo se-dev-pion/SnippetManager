@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as xml from "xml2js";
 
 export async function main(
-  loadedShow: vscode.TreeItem[],
+  loadedView: vscode.TreeItem[],
   context: vscode.ExtensionContext,
 ) {
   const provider = vscode.languages.registerCompletionItemProvider(
@@ -11,7 +11,7 @@ export async function main(
     {
       async provideCompletionItems(document, position, token, context) {
         var allSnippet = [];
-        for (let item of loadedShow) {
+        for (let item of loadedView) {
           const configPath = item.description as string;
           const fileContent = await fs.readFileSync(configPath, {
             encoding: "utf-8",
@@ -29,18 +29,14 @@ export async function main(
                   if (ask !== "确定") {
                     return;
                   }
-                  vscode.commands.executeCommand("vscode.open", 
+                  vscode.commands.executeCommand(
+                    "vscode.open",
                     vscode.Uri.file(configPath),
                   );
                 });
             });
           if (
-            !(
-              result &&
-              result.root &&
-              result.root.name &&
-              result.root.item
-            )
+            !(result && result.root && result.root.name && result.root.item)
           ) {
             vscode.window.showWarningMessage(
               "配置文件必须包含:root & root/name & root/snippetManagerConfig & root/item属性!",
